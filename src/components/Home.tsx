@@ -14,6 +14,12 @@ const Home = () => {
         <li>
           <a href="/shorten-url">Shorten URL</a>
         </li>
+        <li>
+          <a href="/positioning">Positioning</a>
+        </li>
+        <li>
+          <a href="/largeList">Large list</a>
+        </li>
       </ul>
     </div>
   );

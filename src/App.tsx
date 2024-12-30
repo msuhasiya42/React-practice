@@ -5,6 +5,9 @@ import FormWizard from "./components/FormWizard";
 import Home from "./components/Home";
 import InfiniteScroll from "./components/InfiniteScroll";
 import ShortenUrl from "./components/ShortenUrl";
+import Positioning from "./components/Positioning";
+import LargeList from "./components/LargeList";
+
 function App() {
   return (
     <>
@@ -17,6 +20,10 @@ function App() {
           <Route path="/form-wizard" element={<FormWizard />} />
 
           <Route path="/shorten-url" element={<ShortenUrl />} />
+
+          <Route path="/positioning" element={<Positioning/>}></Route>
+
+          <Route path="/largeList" element={<LargeList/>}></Route>
         </Routes>
       </Router>
     </>

@@ -6,12 +6,27 @@ const ShortenUrl = () => {
   const [copySuccess, setCopySuccess] = useState("");
 
   const handleUrl = () => {
-    // logic to shorten url
-    setShortenUrl(shorteningURl());
+    if (!isValidUrl(url)) {
+      alert("Please enter a valid URL");
+      return;
+    }
+    const shortenedUrl = shorteningUrl(url);
+    setShortenUrl(shortenedUrl);
   };
 
-  function shorteningURl() {
-    return "https://mayur.in/" + Math.random().toString(36).substring(2, 8);
+  function isValidUrl(string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function shorteningUrl(inputUrl) {
+    // Use a hash of the input URL for a consistent "shortened" URL
+    const hash = btoa(inputUrl).substring(0, 8); // Simple base64 encoding trimmed to 8 characters
+    return `https://short.ly/${hash}`;
   }
 
   const copyToClipboard = async (text) => {
@@ -22,21 +37,31 @@ const ShortenUrl = () => {
       setCopySuccess("Failed to copy text");
     }
   };
+
   return (
     <div>
-      <h3> Shorten Your URl </h3>
+      <h3>Shorten Your URL</h3>
       <input
         type="text"
+        placeholder="Enter your URL"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-      />{" "}
-      <br /> <br />
-      <button onClick={handleUrl}>Shorten Url</button> <br /> <br />
+      />
+      <br />
+      <br />
+      <button onClick={handleUrl}>Shorten URL</button>
+      <br />
+      <br />
       {shortenUrl && (
         <div>
-          <p>{shortenUrl}</p>
+          <p>
+            Shortened URL:{" "}
+            <a href={shortenUrl} target="_blank" rel="noopener noreferrer">
+              {shortenUrl}
+            </a>
+          </p>
           <button onClick={() => copyToClipboard(shortenUrl)}>
-            Copy to clipboard
+            Copy to Clipboard
           </button>
         </div>
       )}
